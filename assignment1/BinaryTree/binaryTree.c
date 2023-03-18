@@ -2,21 +2,18 @@
 #include<stdlib.h>
 #include<stdio.h>
 
-void initTree(BT* tNode) {
+void initBinaryTree(BT* tNode) {
      *tNode = NULL;
      return ;
 }
-
 
 
 int randomNumberGenerator(int upperLimit,int lowerLimit){
 return (rand() % (upperLimit - lowerLimit + 1)) + lowerLimit ;
 }
 void initFileWithRandomNumbers( char filename[] ,int upperLimit,int lowerLimit,int limit){
-     
-     printf("\n");
       FILE *fptr;
-    fptr = fopen("file1.txt","w");
+    fptr = fopen(filename,"w");
     
     if(!fptr){
         printf("Failed to Open the file");
@@ -28,28 +25,22 @@ void initFileWithRandomNumbers( char filename[] ,int upperLimit,int lowerLimit,i
         int num = randomNumberGenerator(upperLimit,lowerLimit);
          fprintf(fptr, "%d %s",  num," ");
     }
-    // char buf[100];
-    //  while (fscanf(fptr, "%d ",buf) == 1)
-    //     printf("%d\n", buf);
     fclose(fptr);
 
 }
 
-void preOrder(BT tNode){
+void preOrderBT(BT tNode){
     if(!tNode)
     return;
 
     printf("%d ",tNode -> data);
-    preOrder(tNode -> left);
-    preOrder(tNode -> right);
-
+    preOrderBT(tNode -> left);
+    preOrderBT(tNode -> right);
 
 }
 
 
 void insertIntoTree(BT* tNode,int data){
-        // if(*tNode && (*tNode) -> data == data)
-        // return ;
 
         if(!(*tNode)){
                 Node* newnode = (Node*)malloc(sizeof(Node));
@@ -62,20 +53,20 @@ void insertIntoTree(BT* tNode,int data){
 
         int randomNo = randomNumberGenerator(1000,100);
         if((randomNo % 2) == 0){ // Even number found so go to left
-                if((!(*tNode) -> right) && (!(*tNode) -> left)){
+                // if((!(*tNode) -> right) && (!(*tNode) -> left)){
+                    // insertIntoTree(&(*tNode) -> left,data);
+                // }
+                // else{
                     insertIntoTree(&(*tNode) -> left,data);
-                }
-                else{
-                    insertIntoTree(&(*tNode) -> left,data);
-                }
+                // }
         }                    // else go to right
         else if(randomNo % 2 == 1){
-            if(!(*tNode) -> left){
-                    return;
-                }
-                else{
+            // if(!(*tNode) -> left){
+                    // return;
+                // }
+                // else{
                     insertIntoTree(&(*tNode) -> right,data);
-                }
+                // }
         }
 }
 
@@ -84,7 +75,7 @@ void insertIntoTree(BT* tNode,int data){
 
 void helpInsertingIntoTree(BT *tNode,char filename[],int limit,int upperLimit,int lowerLimit){
     FILE *fptr;
-    fptr = fopen("file1.txt","r");
+    fptr = fopen(filename,"r");
     
     if(!fptr){
         printf("Failed to Open the file");
@@ -100,7 +91,17 @@ void helpInsertingIntoTree(BT *tNode,char filename[],int limit,int upperLimit,in
                 insertIntoTree(tNode,data);
         }
         
-
-      
-
 }
+
+int searchInBinaryTree(BT tNode,int key,int *ct){
+    if(!tNode)
+        return 0;
+
+    if(tNode -> data == key)
+    return 1;
+
+    *ct = *ct + 1;
+
+    return searchInBinaryTree(tNode -> left ,key,ct) || searchInBinaryTree(tNode -> right,key,ct);
+}
+
