@@ -94,16 +94,16 @@ int searchIntoBST(Tree bst,int key,int *ct){
     //Iterative
     while(bst){
         if(!bst)
-        return 0;
+            return 0;
         
         *ct = *ct + 1;
         
-        if(bst -> data == key){
+        if(bst -> data == key)
             return 1;
-        }
-        else if(bst -> data > key){
+
+        else if(bst -> data > key)
             bst = bst -> right;
-        }
+        
         else
         bst = bst -> left;
     }
