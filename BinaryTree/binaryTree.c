@@ -2,7 +2,7 @@
 #include<stdio.h>
 
 #include "binaryTree.h"
-#include "../../genericQueue/queue.h"
+#include "../genericQueue/queue.h"
 void initBinaryTree(BT* tNode) {
      *tNode = NULL;
      return ;
@@ -103,7 +103,66 @@ int levelOrderSearch(BT tnode,int key){
     return ct;
 }
 
+void internalNodes(BT tnode){
+    
+    if(!tnode){
+        return;
+    }
+    int key = 15;
+    // Queue q;
+    // initQueue(&q,sizeof(tnode));
 
+    // BT temp = tnode;
+    // enqueue(&q,&temp);
+    // while(getQueueSize(&q) > 0 ){
+    // int size = getQueueSize(&q);
+    // printf("%d",size);
+    //     temp = NULL;
+    //     dequeue(&q,&temp);
+    //     printf("%d ",temp -> data);
+    //     // break;
+    //     // if(!temp -> left && !temp -> right){
+    //     //     continue;
+    //     // }
+        
+    //     if(temp -> left){
+    //         enqueue(&q,temp -> left);
+    //     }
+    //     if(temp -> right){
+    //         enqueue(&q,temp -> right);
+    //     }
+    // }
+     if(!tnode)
+    return ;
+    
+    Queue q;
+
+    initQueue(&q, sizeof(BT));
+    BT temp = tnode;
+
+    enqueue(&q,&temp);
+    // printf("\n");
+    int ct = 0;
+
+    while(getQueueSize(&q) > 0){
+        BT temporary = NULL;
+        dequeue(&q,&temporary);
+
+        ct++;
+        if(temporary -> data == key){
+            return ;
+        }
+        if(temporary -> left){
+                enqueue(&q,&(temporary -> left));
+        }
+        if(temporary -> right)
+                enqueue(&q,&(temporary -> right));
+
+    }
+    // return ct;
+    return ;
+
+}
 
 
 void helpInsertingIntoTree(BT *tNode,char filename[],int limit,int upperLimit,int lowerLimit){

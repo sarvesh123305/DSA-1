@@ -17,3 +17,4 @@ void initFileWithRandomNumbers( char filename[] ,int upperLimit,int lowerLimit,i
 void helpInsertingIntoTree(BT *tNode,char filename[],int limit,int upperLimit,int lowerLimit);
 int searchInBinaryTree(BT,int,int*);
 int levelOrderSearch(BT tnode,int key);
+void internalNodes(BT tnode);
