@@ -1,7 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include "BST.h"
-// #include "../genericQueue/queue.h"
 
 
 
@@ -72,33 +71,32 @@ void inOrder(Tree tnode){
     inOrder(tnode -> right);
 }
 void preOrder(Tree tNode){
-    if(!tNode){
-            return ;
-    }
-
-    printf("%d ",tNode -> data);
-    preOrder(tNode -> left);
-    preOrder(tNode -> right);
-    // Tree p = tNode, q ;
-    // Stack s;
-    // initStack(&s);
-    // pushS(&s,tNode);
-
-    // while(1){
-    //     if(p){
-    //         pushS(&s,p);
-    //         p = p -> left;
-    //     }
-    //     else{
-    //         if(!isEmpty(s)){
-    //             List temp = pop(&s);
-    //             printf("%d ",temp -> data -> data );
-    //             p = p -> right;
-    //         }
-    //         else 
-    //             break;
-    //     }
+    // if(!tNode){
+            // return ;
     // }
+
+    // printf("%d ",tNode -> data);
+    // preOrder(tNode -> left);
+    // preOrder(tNode -> right);
+    Tree p = tNode, q ;
+    Stack s;
+    initStack(&s);
+    while(1){
+        if(p){
+            pushS(&s,p);
+            p = p -> left;
+        }
+        else{
+            if(!isEmpty(s)){
+                snode* temp = pop(&s);
+                printf("%d ",temp -> data -> data );
+                p = temp -> data;
+                p = p -> right;
+            }
+            else 
+                break;
+        }
+    }
         
 } 
 void leafNodes(Tree tNode){

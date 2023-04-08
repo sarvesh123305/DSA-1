@@ -1,38 +1,42 @@
 #include "stack.h"
+#include<stdlib.h>
+#include<stdio.h>
 
 void initTree(Tree* tree){
     (*tree) = NULL;
 }
 
 void initStack(Stack *s){
-    s -> top = NULL;
+    (*s) = NULL;
     return;
 }
 void pushS(Stack* s,Tree t){
-    List newnode = (List)malloc(sizeof(LinkedList));
+    snode* newnode = (snode*)malloc(sizeof(snode));
     newnode -> next = NULL;
     newnode -> data = t;
+
+    // printf("\nData %d",newnode->data-> data);
     if(isEmpty(*s)){
-        s -> top = newnode;  
+        *s = newnode;  
         return ;  
     }
     else{
-        newnode -> next = s -> top;
-        s -> top = newnode;
+        newnode -> next = *s ;
+        *s = newnode;
     }
-    // printf("Data %d",s -> top -> data -> data);
 }
 void displayStack(Stack s){
-    List temp = s.top;
-    while(temp ){
+    snode* temp = s;
+    printf("\n");
+    while(temp){
         printf("%d ",temp -> data -> data);
         temp = temp -> next;
     }
     printf("\n");
     return ;
 }
-List pop(Stack* s){
-    List deleteNode;
+snode* pop(Stack* s){
+    snode* deleteNode;
         // printf("%d ",s -> top -> data -> data);
 
     if(isEmpty(*s)){
@@ -40,12 +44,12 @@ List pop(Stack* s){
         return NULL;
     }
     else{
-        deleteNode = s -> top;
-        s -> top = s -> top -> next;
+        deleteNode = *s;
+        (*s)  = (*s) -> next;
     }
     // free(deleteNode);
     return deleteNode;
 }
 int isEmpty(Stack s){
-    return s.top == NULL;
+    return ( s == NULL);
 }

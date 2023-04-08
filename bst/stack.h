@@ -1,16 +1,17 @@
-typedef struct LinkedStack{
-    int data;
-    struct LinkedStack *next;
-}LinkedList;
+#ifndef BST_H
+#define BST_H
+#include "BST.h"
 
-typedef LinkedList* List;
-typedef struct Stack{
-    List top;
-}Stack;
-
+typedef struct snode{
+    Tree data;
+    struct snode *next;
+}snode;
+typedef snode* Stack;
 
 void initStack(Stack*);
 void pushS(Stack*,Tree t);
-List pop(Stack*);
+snode* pop(Stack*);
 int isEmpty(Stack);
+void displayStack(Stack);
 
+#endif

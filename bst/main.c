@@ -1,7 +1,11 @@
 #include<stdio.h>
-#include "BST.h"
+// #include "BST.h"
 #include<stdlib.h>
-
+#ifndef MAIN_H
+#define MAIN_H
+#include "stack.h"
+#include "BST.h"
+#endif
 
 int randomNumberGenerator(int upperLimit,int lowerLimit){
     return (rand() % (upperLimit - lowerLimit + 1)) + lowerLimit ;
@@ -17,27 +21,17 @@ int main(){
  
         // tree2 = tree1;
         insertIntoTree(&tree1,15);
-        insertIntoTree(&tree2,10);
-        insertIntoTree(&tree3,20);
-        insertIntoTree(&tree4,8);
-        insertIntoTree(&tree5,12);
-        Stack s;
-        initStack(&s);
-        pushS(&s,tree1);
-        pushS(&s,tree2);
-        pushS(&s,tree3);
-        pushS(&s,tree4);
-        pushS(&s,tree5);
 
-        // insertIntoTree(&tree1,16);
-        // insertIntoTree(&tree1,215);
-        // insertIntoTree(&tree1,25);
-        // insertIntoTree(&tree1,210);
-        // insertIntoTree(&tree1,82);
-        // insertIntoTree(&tree1,122);
-        // insertIntoTree(&tree1,162);
-        // insertIntoTree(&tree1,2215);
-        // insertIntoTree(&tree1,2315);
+        insertIntoTree(&tree1,10);
+        insertIntoTree(&tree1,20);
+        insertIntoTree(&tree1,8);
+        insertIntoTree(&tree1,12);
+        insertIntoTree(&tree1,82);
+        insertIntoTree(&tree1,122);
+        insertIntoTree(&tree1,162);
+        insertIntoTree(&tree1,2215);
+        insertIntoTree(&tree1,2315);
+       preOrder(tree1);
         // printf("Balanced or not %d \n",checkBalancedTree(tree1));
      
 
