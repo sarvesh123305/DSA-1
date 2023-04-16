@@ -31,4 +31,6 @@ void removeNode(Tree *tnode,int key);
 int checkBalancedTree(Tree tnode);
 
 void insertIntoTree(Tree *tnode,int data);
+int travelEverythinginOOfOneSpace(Tree tnode);    
+
 #endif

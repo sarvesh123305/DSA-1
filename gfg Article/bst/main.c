@@ -3,7 +3,7 @@
 
 typedef struct tree{
     int data;
-    struct tree* left;              //Making structure with left , right pointer and data 
+    struct tree* left;          //Making structure with left , right pointer and data 
     struct tree* right;
 }tree;  
 typedef tree* Tree;
@@ -23,26 +23,27 @@ void insertIntoTree(Tree *tnode,int data){
         *tnode = newnode;               // If tree is empty , make the newnode as root
         return;
      }
-     Tree p = *tnode,q = NULL;
-     while(p){
-        q = p ;
-        if( p -> data == data){                 //If duplicate data is being inserted , discard it 
+     Tree current = *tnode,prev = NULL;
+     while(current){
+        prev = current ;
+        if( current -> data == data)               //If duplicate data is being inserted , discard it 
             return ;
-        }
-        else if(p -> data > data){
-            p = p -> left;                  //If data to be inserted is less than tnode -> data then go left
-        }   
-        else{
-            p = p -> right;              //If data to be inserted is more than tnode -> data then go right
-        }     
+        
+        else if(current -> data > data)
+            current = current -> left;                  //If data to be inserted is less than tnode -> data then go left
+        
+        else
+            current = current -> right;              //If data to be inserted is more than tnode -> data then go right
+         
      }
-     if(q -> data > data){
-        q -> left = newnode;
-     }
-     else{
-        q -> right = newnode;
-     }
-
+  
+     if(prev -> data > data)
+        prev -> left = newnode;
+     
+     else
+        prev -> right = newnode;
+     
+	return ;
 }
 
 
@@ -50,7 +51,7 @@ int getCountOfNodes(Tree tnode)
 {
 
     int count = 0 ;                             //Initialize count to 0
-   tree* curr = tnode;
+    Tree curr = tnode;
     while(curr != NULL){
         if(curr -> left == NULL){                   //If current node is NULL then print data of the current node and move pointer to right
             // printf("%d ",curr -> data);             
@@ -58,10 +59,10 @@ int getCountOfNodes(Tree tnode)
             curr = curr -> right;
         }
         else{
-            tree* prev = curr -> left;                           //Store left child of current in some variable
-            while( prev -> right && prev -> right != curr){     
+            Tree prev = curr -> left;                           //Store left child of current in some variable
+            while( prev -> right && prev -> right != curr)     
                 prev = prev -> right;                              //Iterate until prev -> right != NULL or prev -> right != current node
-            } 
+            
 
             if(prev -> right == NULL){                  // If this is last node then , make a temporary pointer to root (tnode)
                 prev -> right = curr;                   //Move current pointer to left

@@ -33,7 +33,7 @@ void insertIntoaBST(aBST* tnode,int data){
     while(index < size && tnode -> A[index] != INT_MIN){    //Checking to insert data at right position
         
         if(tnode -> A[index] == data)                       //If duplicate exits, return i.e discard it
-        return ;
+             return ;
         
         else if(tnode -> A[index] > data){
             index = 2 * index + 1;              //Go left
@@ -48,7 +48,7 @@ void insertIntoaBST(aBST* tnode,int data){
             tnode -> A[index] = data;
             return ;
     }
-
+    
         tnode -> A = (int*) realloc(tnode -> A,sizeof(int) * (index+1)); //Now if size of array is less and data is 
                                                                          //to be inserted at size greater than array , 
                                                                          //then reallocate memory

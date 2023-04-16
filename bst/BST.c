@@ -71,32 +71,34 @@ void inOrder(Tree tnode){
     inOrder(tnode -> right);
 }
 void preOrder(Tree tNode){
-    // if(!tNode){
-            // return ;
-    // }
-
-    // printf("%d ",tNode -> data);
-    // preOrder(tNode -> left);
-    // preOrder(tNode -> right);
-    Tree p = tNode, q ;
-    Stack s;
-    initStack(&s);
-    while(1){
-        if(p){
-            pushS(&s,p);
-            p = p -> left;
-        }
-        else{
-            if(!isEmpty(s)){
-                snode* temp = pop(&s);
-                printf("%d ",temp -> data -> data );
-                p = temp -> data;
-                p = p -> right;
-            }
-            else 
-                break;
-        }
+    if(!tNode){
+            return ;
     }
+
+    printf("%d ",tNode -> data);
+    preOrder(tNode -> left);
+    preOrder(tNode -> right);
+    // Tree p = tNode, q ;
+    // Stack s;
+    // 
+    
+    // initStack(&s);
+    // while(1){
+    //     if(p){
+    //         pushS(&s,p);
+    //         p = p -> left;
+    //     }
+    //     else{
+    //         if(!isEmpty(s)){
+    //             snode* temp = pop(&s);
+    //             printf("%d ",temp -> data -> data );
+    //             p = temp -> data;
+    //             p = p -> right;
+    //         }
+    //         else 
+    //             break;
+    //     }
+    // }
         
 } 
 void leafNodes(Tree tNode){
@@ -358,17 +360,18 @@ int abs(int a){
     return a;
 }
 int checkBalancedTree(Tree tnode){
-    if(!tnode){
+    if(!tnode)
         return 1;
-    }
+    
 
     int left = checkBalancedTree(tnode -> left);
     int right = checkBalancedTree(tnode -> right);
 
     int diff = abs(heightOfTree(tnode -> left) - heightOfTree(tnode -> right)) <= 1;
-    if(left && right && diff){
+    
+    if(left && right && diff)
         return 1;
-    }
+    
     return 0;
 }
 
@@ -382,9 +385,9 @@ void sumOfLongestBloodLine(Tree tnode,int len,int sum,int maxSum,int maxLen){
             maxSum = sum;
             maxLen = len;
         }
-        else if(len == maxLen){
+        else if(len == maxLen)
             maxSum = max(maxSum,sum);
-        }
+        
 
         return ;
     }
@@ -392,4 +395,90 @@ void sumOfLongestBloodLine(Tree tnode,int len,int sum,int maxSum,int maxLen){
     sumOfLongestBloodLine(tnode -> left,len+1,sum,maxSum,maxLen);
     sumOfLongestBloodLine(tnode -> right,len+1,sum,maxSum,maxLen);
 
+}
+void morrisTraversalPreorder(Tree root)
+{
+    while (root)
+    {
+        // right child.
+        if (root->left == NULL)
+        {
+                printf("%d ",root -> data);
+
+            // cout<<root->data<<" ";
+            root = root->right;
+        }
+        else
+        {
+            // Find inorder predecessor
+            Tree current = root->left;
+            while (current->right && current->right != root)
+                current = current->right;
+ 
+            // If the right child of inorder predecessor already points to
+            // this node
+            if (current->right == root)
+            {
+                current->right = NULL;
+                root = root->right;
+            }
+ 
+            // If right child doesn't point to this node, then print this
+            // node and make right child point to this node
+            else
+            {
+                printf("%d ",root -> data);
+                // cout<<root->data<<" ";
+                current->right = root;
+                root = root->left;
+            }
+        }
+    }
+}
+
+int countLeafNodes(Tree tnode){
+    if(!tnode)
+        return 0;
+    if(!tnode -> left && !tnode -> right){
+        return  1;
+    }
+    return countLeafNodes(tnode -> left) + countLeafNodes(tnode -> right);
+
+}
+int travelEverythinginOOfOneSpace(Tree tnode)    //How?
+{
+// printf("\nCount Leaf : %d\n", countLeafNodes(tnode));
+
+int count = 0 ;
+// morrisTraversalPreorder(tnode);
+printf("\n"); 
+   tree* curr = tnode;
+    while(curr != NULL){
+        if(curr -> left == NULL){
+            printf("%d ",curr -> data);
+            count++;
+            curr = curr -> right;
+        }
+        else{
+            tree* prev = curr -> left;
+            while( prev -> right && prev -> right != curr){
+                prev = prev -> right;
+            } 
+
+            if(prev -> right == NULL){
+                prev -> right = curr;
+                curr = curr -> left;
+            }
+            else{
+                prev -> right = NULL;
+
+                printf("%d ",curr -> data);
+            count++;
+
+                curr = curr -> right;
+            }
+        }
+    }
+        printf("\nSelf made function  Count : %d",count);
+    return count;
 }

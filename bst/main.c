@@ -28,12 +28,15 @@ int main(){
         insertIntoTree(&tree1,12);
         insertIntoTree(&tree1,82);
         insertIntoTree(&tree1,122);
-        insertIntoTree(&tree1,162);
-        insertIntoTree(&tree1,2215);
-        insertIntoTree(&tree1,2315);
-       preOrder(tree1);
+        insertIntoTree(&tree1,2);
+        insertIntoTree(&tree1,123);
+        
+    //    preOrder(tree1);
+       inOrder(tree1);
+
+        printf("\n");
+     travelEverythinginOOfOneSpace(tree1) ;
         // printf("Balanced or not %d \n",checkBalancedTree(tree1));
-     
 
     // Tree re = removeNodeRecursive(&tree1,15);
     // if(re)
@@ -41,7 +44,6 @@ int main(){
     // inOrder(tree1);
     // internalNodes(tree1);
     // removeNode(&tree1,12);
-
 
 
 
