@@ -93,7 +93,6 @@ int main(){
     insertIntoTree(&tree1,82);
     insertIntoTree(&tree1,122);
     insertIntoTree(&tree1,2);
-    insertIntoTree(&tree1,123);
 
     int count = getCountOfNodes(tree1) ;            
     printf("Count of nodes : %d \n", count);

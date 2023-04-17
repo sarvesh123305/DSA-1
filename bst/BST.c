@@ -78,29 +78,82 @@ void preOrder(Tree tNode){
     printf("%d ",tNode -> data);
     preOrder(tNode -> left);
     preOrder(tNode -> right);
-    // Tree p = tNode, q ;
-    // Stack s;
-    // 
     
-    // initStack(&s);
-    // while(1){
-    //     if(p){
-    //         pushS(&s,p);
-    //         p = p -> left;
-    //     }
-    //     else{
-    //         if(!isEmpty(s)){
-    //             snode* temp = pop(&s);
-    //             printf("%d ",temp -> data -> data );
-    //             p = temp -> data;
-    //             p = p -> right;
-    //         }
-    //         else 
-    //             break;
-    //     }
-    // }
-        
+  
 } 
+void postOrder(Tree tNode){
+        if(!tNode){
+                return ;
+        }
+
+        postOrder(tNode -> left);
+        postOrder(tNode -> right);
+        printf("%d ",tNode -> data);
+    }   
+void iterativeInOrder(Tree tnode){
+    if(!tnode)
+        return ;
+
+        Tree p = tnode;
+        Stack s;
+        initStack(&s);
+
+        while(1){
+            if(p){
+                pushS(&s,p);
+                p = p -> left;
+            }
+            else{
+                while(!isEmpty(s)){
+                    snode* temp = pop(&s);
+                    printf("%d ",temp -> data -> data);
+                    p = temp -> data;
+                    p = p -> right;
+                }
+            }
+        }
+}
+
+void iterativePreOrder(Tree tnode){
+    if(!tnode)
+        return ;
+    
+    Stack s;
+    initStack(&s);
+    pushS(&s,tnode);
+    while(!isEmpty(s)){
+        snode* temp = pop(&s);
+        printf("%d ",temp-> data -> data);
+        if(temp -> data -> right)
+            pushS(&s,temp -> data -> right);
+        if(temp -> data -> left)
+            pushS(&s,temp -> data -> left);
+
+    }
+    return ;
+}
+void iterativePostOrderUsing2Stack(Tree tnode){
+    if(!tnode)
+        return ;
+    Stack s1,s2;
+    initStack(&s1);
+    initStack(&s2);
+
+    pushS(&s1,tnode);
+    while (!isEmpty(s1))
+    {
+        snode* temp = pop(&s1);
+        pushS(&s2,temp-> data);
+
+        if(temp -> data -> left)
+            pushS(&s1,temp -> data -> left);
+        if(temp -> data -> right)
+            pushS(&s1,temp -> data -> right);
+    }
+    while(!isEmpty(s2))
+        printf("%d ",pop(&s2) -> data -> data);
+    
+}
 void leafNodes(Tree tNode){
     if(!tNode)
     return ;

@@ -24,18 +24,24 @@ int main(){
 
         insertIntoTree(&tree1,10);
         insertIntoTree(&tree1,20);
-        insertIntoTree(&tree1,8);
+        insertIntoTree(&tree1,5);
         insertIntoTree(&tree1,12);
-        insertIntoTree(&tree1,82);
-        insertIntoTree(&tree1,122);
-        insertIntoTree(&tree1,2);
-        insertIntoTree(&tree1,123);
+        insertIntoTree(&tree1,17);
+        insertIntoTree(&tree1,22);
+        // insertIntoTree(&tree1,2);
+        // insertIntoTree(&tree1,123);
+        // postOrder(tree1);
+        // printf("\n");
         
     //    preOrder(tree1);
-       inOrder(tree1);
-
+        // printf("\n");
+    
+    //    inOrder(tree1);
+    iterativePostOrderUsing2Stack(tree1);
+    
         printf("\n");
-     travelEverythinginOOfOneSpace(tree1) ;
+        // iterativePreOrder(tree1);
+    //  travelEverythinginOOfOneSpace(tree1) ;
         // printf("Balanced or not %d \n",checkBalancedTree(tree1));
 
     // Tree re = removeNodeRecursive(&tree1,15);
