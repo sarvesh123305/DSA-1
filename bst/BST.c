@@ -154,6 +154,41 @@ void iterativePostOrderUsing2Stack(Tree tnode){
         printf("%d ",pop(&s2) -> data -> data);
     
 }
+
+void iterativePostOrderUsing1Stack(Tree tnode){
+    if(!tnode)
+        return;
+    
+    Tree current = tnode;
+    Stack s;
+    initStack(&s);
+
+    while(current || !isEmpty(s)){
+        if(current)
+        {
+            pushS(&s,current);
+            current = current -> left;
+        }
+        else{
+            Tree temp = pop(&s) -> data -> right;
+            
+            if(!temp){
+             temp = pop(&s) -> data;
+             printf("%d ",temp -> data ) ;
+                while(!isEmpty(s) && temp == top(s) -> data -> right){
+                        temp = pop(&s) -> data;
+                  printf("%d ",temp -> data ) ;
+
+                 }
+
+            }else{
+                current = temp;
+            }
+
+        }
+    }
+    displayStack(s);
+}
 void leafNodes(Tree tNode){
     if(!tNode)
     return ;

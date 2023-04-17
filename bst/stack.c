@@ -53,3 +53,9 @@ snode* pop(Stack* s){
 int isEmpty(Stack s){
     return ( s == NULL);
 }
+
+snode* top(Stack s){
+    if(isEmpty(s))
+        return NULL;
+    return s ;
+}

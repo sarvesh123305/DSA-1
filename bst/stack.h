@@ -13,5 +13,6 @@ void pushS(Stack*,Tree t);
 snode* pop(Stack*);
 int isEmpty(Stack);
 void displayStack(Stack);
+snode* top(Stack s);
 
 #endif

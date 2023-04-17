@@ -24,6 +24,8 @@ void inOrder(Tree tNode);
 void preOrder(Tree tNode);
 void postOrder(Tree);
 void iterativePostOrderUsing2Stack(Tree);
+void iterativePostOrderUsing1Stack(Tree);
+
 //Extra functions
 int travelEverythinginOOfOneSpace(Tree tnode);    
 int checkBalancedTree(Tree tnode);

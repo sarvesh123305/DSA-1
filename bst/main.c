@@ -37,7 +37,8 @@ int main(){
         // printf("\n");
     
     //    inOrder(tree1);
-    iterativePostOrderUsing2Stack(tree1);
+    // iterativePostOrderUsing2Stack(tree1);
+    iterativePostOrderUsing1Stack(tree1);
     
         printf("\n");
         // iterativePreOrder(tree1);
