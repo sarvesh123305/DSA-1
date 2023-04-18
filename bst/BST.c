@@ -35,11 +35,9 @@ void insertIntoTree(Tree *tnode,int data){
      newnode -> data = data;
 
      if(!*tnode){
-    //  printf("got");
         *tnode = newnode;
         return;
      }
-    //  exit(0);
      Tree p = *tnode,q = NULL;
      while(p){
         q = p ;
@@ -104,14 +102,19 @@ void iterativeInOrder(Tree tnode){
                 p = p -> left;
             }
             else{
-                while(!isEmpty(s)){
-                    snode* temp = pop(&s);
-                    printf("%d ",temp -> data -> data);
-                    p = temp -> data;
+                if(!isEmpty(s)){
+                    Tree temp = pop(&s) -> data;
+                    printf("%d ",temp -> data);
+                    p = temp ;
                     p = p -> right;
+                }
+                else{
+                    break;
                 }
             }
         }
+        printf("\n");
+        return ;
 }
 
 void iterativePreOrder(Tree tnode){
@@ -170,8 +173,7 @@ void iterativePostOrderUsing1Stack(Tree tnode){
             current = current -> left;
         }
         else{
-            Tree temp = pop(&s) -> data -> right;
-            
+            Tree temp = top(s) -> data -> right;
             if(!temp){
              temp = pop(&s) -> data;
              printf("%d ",temp -> data ) ;

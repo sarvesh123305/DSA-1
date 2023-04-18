@@ -18,26 +18,24 @@ int main(){
     initTree(&tree4);
     initTree(&tree5);
 
- 
         // tree2 = tree1;
         insertIntoTree(&tree1,15);
-
         insertIntoTree(&tree1,10);
         insertIntoTree(&tree1,20);
         insertIntoTree(&tree1,5);
         insertIntoTree(&tree1,12);
-        insertIntoTree(&tree1,17);
-        insertIntoTree(&tree1,22);
+        // insertIntoTree(&tree1,17);
+        insertIntoTree(&tree1,20);
+        insertIntoTree(&tree1,82);
         // insertIntoTree(&tree1,2);
         // insertIntoTree(&tree1,123);
         // postOrder(tree1);
         // printf("\n");
-        
     //    preOrder(tree1);
-        // printf("\n");
-    
     //    inOrder(tree1);
-    // iterativePostOrderUsing2Stack(tree1);
+    iterativePostOrderUsing2Stack(tree1);
+        printf("\n");
+    iterativeInOrder(tree1);
     iterativePostOrderUsing1Stack(tree1);
     
         printf("\n");
@@ -51,22 +49,6 @@ int main(){
     // inOrder(tree1);
     // internalNodes(tree1);
     // removeNode(&tree1,12);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // 16 12 11 10 14 13 20
     // printf("\n");
     // preOrder(tree1);

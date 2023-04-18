@@ -1,2 +1,2 @@
-gcc main.c BST.c ../genericQueue/queue.c
+gcc main.c BST.c stack.c
 ./a.out

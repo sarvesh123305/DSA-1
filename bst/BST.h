@@ -19,10 +19,11 @@ void insertIntoTree(Tree *tnode,int data);
 Tree removeNodeRecursive(Tree *root , int key);
 
 //Traversals
-void iterativePreOrder(Tree);
-void inOrder(Tree tNode);
 void preOrder(Tree tNode);
+void inOrder(Tree tNode);
 void postOrder(Tree);
+void iterativePreOrder(Tree);
+void iterativeInOrder(Tree tnode);
 void iterativePostOrderUsing2Stack(Tree);
 void iterativePostOrderUsing1Stack(Tree);
 
