@@ -175,13 +175,13 @@ void RRRotation(AVLTree* tnode,AVLTree* mainTNode){
     reassignBalanceFactor(&A);
 }
 void LRRotation(AVLTree* tnode,AVLTree* mainTNode){
-    RRRotation(&(*mainTNode)-> left,tnode);
-    LLRotation(mainTNode ,mainTNode);
+    RRRotation(&(*tnode)-> left,mainTNode);
+    LLRotation(tnode ,mainTNode);
 }
 
 void RLRotation(AVLTree* tnode,AVLTree* mainTNode){
-    LLRotation(&(*mainTNode) -> right,tnode);
-    RRRotation((mainTNode),mainTNode);
+    LLRotation(&(*tnode) -> right,mainTNode);
+    RRRotation(tnode,mainTNode);
 }
 void insertIntoTree(AVLTree *tnode,int data){
      avlTree* newnode =  mallocateANode(tnode,data);

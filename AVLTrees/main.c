@@ -67,10 +67,10 @@ int main(){
     //Works Fine
 
     //RR Check
-    // insertIntoTree(&t,10);
-    // insertIntoTree(&t,20);
-    // insertIntoTree(&t,30);
-    // insertIntoTree(&t,40);
+    insertIntoTree(&t,10);
+    insertIntoTree(&t,20);
+    insertIntoTree(&t,30);
+    insertIntoTree(&t,40);
     //Works Fine
 
     // inOrder(t);

@@ -398,7 +398,7 @@ void removeNode(Tree *tnode,int key){
                 q -> left = p -> left;
             
             else
-                q -> right = p -> right;
+                q -> right = p -> left;
         }
         free(deleteNode);
         return;
@@ -415,7 +415,7 @@ void removeNode(Tree *tnode,int key){
                 q -> left = p -> left;
             
             else
-                q -> right = p -> right;
+                q -> right = p -> left;
         }
         free(deleteNode);
         return;

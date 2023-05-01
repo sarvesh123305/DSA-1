@@ -8,95 +8,91 @@
 #include<string.h>
 #endif
 
+void insertIntoTreeHelper(AVLTree *t,int *i){
+    char data[1000];
+    printf("\nEnter data (string) : ");
+    scanf("%s",data);
+    insertIntoTree(t,data);
+}
+void removeNodeFromTreeHelper(AVLTree *t){
+    char data[1000];
+    printf("\nEnter a data to delete : ");
+    scanf("%s",data);
+    removeNode(t,data);
+}
+
 
 int main(){
     AVLTree t;
     initAVLTree(&t);   
-   
-    //RL Check
+    char data[1000][1000];
+    int i = 0 ;
+    FILE* fp;
+    char ch;
+    int k = 0; 
+    fp = fopen("data.txt", "r");
+     if (NULL == fp) {
+        return 0;
+    }
+  char str[1000];
+    //   int i = 0;
 
-    // insertIntoTree(&t,10);
-    // insertIntoTree(&t,20);
-    // insertIntoTree(&t,30);
-    // insertIntoTree(&t,40);
-    // insertIntoTree(&t,50);
-    // insertIntoTree(&t,25);
-    //Works Fine
+    while (fscanf(fp, "%s", data[k]) != EOF) {
+        printf(" %s\n", data[k]);
+        insertIntoTree(&t,data[k]);
+        k++;
+        i++;
+    }
 
-    //LR Check
+    preOrder(t);
 
-    // insertIntoTree(&t,100);
-    // insertIntoTree(&t,120);
-    // insertIntoTree(&t,50);
-    // insertIntoTree(&t,25);
-    // insertIntoTree(&t,75);
-    // insertIntoTree(&t,80 );
-    //Works Fine
-
-
-/*
-    RUNTIME CHECK
-*/
-
-    // insertIntoTree(&t,"Soham");
-    // insertIntoTree(&t,"Mahind");
-    // insertIntoTree(&t,"Sahel");
     // insertIntoTree(&t,"Sarvesh");
-    // insertIntoTree(&t,"Aditya");
-    // insertIntoTree(&t,"Pratyay");
-    insertIntoTree(&t,"Soham");
-    insertIntoTree(&t,"Sarvesh");
-    insertIntoTree(&t,"Tushar");
-    insertIntoTree(&t,"Sadanand");
-    insertIntoTree(&t,"SoalMortal");
+    // insertIntoTree(&t,"Mahind");
+    // insertIntoTree(&t,"Kulkarni");
+    // removeNode(&t,"Mahind");
 
-    insertIntoTree(&t,"Zuned");
-    insertIntoTree(&t,"Sara");
+    // preOrder(t);
+    // removeNode(&t,"Kulkarni");
+    // preOrder(t);
+    //Testing
+    //  printf("\nEnter data (string) : ");
+    //                     scanf("%s",data[i]);
+    //                     insertIntoTree(&t,data[i]);
+    //                     i++;
+    //                     scanf("%s",data[i]);
+    //                     insertIntoTree(&t,data[i]);
+    //                     preOrder(t);
+    //                     removeNode(&t,"Sarvesh");
+    //                     preOrder(t);
 
+    // do{
+        // printf("\n\n*****AVL Tree Program*****\n");
+        // printf("\n1.Insert into Tree ");
+        // printf("\n2.Delete a node ");
+        // printf("\n3.Display Tree");
+        // printf("\n4.Destroy whole tree");
+        // printf("\n5.Exit\n\n");
 
-
-
-    preOrder(t);
-    printf("\n\n");
-    removeNode(&t,"Soham");
-    // destroyTree(&t);
-    
-
-/*
-    END CHECK
-*/
-    //LL Check
-
-    // insertIntoTree(&t,"Saf");//10
-    // insertIntoTree(&t,"Sac");//20
-    // insertIntoTree(&t,"Sai");//50
-    // insertIntoTree(&t,"Saa");//20
-    // insertIntoTree(&t,"Sad");//20
-    // insertIntoTree(&t,"Sae");//30
-    // insertIntoTree(&t,"Sag");//40
-    // insertIntoTree(&t,"Sad");//25
-
-    //Works Fine Checked
-    // removeNode(&t,"Saf");
-    // AVLTree tempp =  removeNodeRecursive(&t,"Sac");
-    // printf("\n%s", tempp -> data);
-    // printf("OP ; %d\n",strcmp("Sar","Sas"));
-
-    // printf("\nOP ; %d",strcmp("Sar","Sak"));
-
-    // insertIntoTree(&t,15);
-    // insertIntoTree(&t,1);
-    // insertIntoTree(&t,0);
-    //Works Fine
-
-    //RR Check
-    // insertIntoTree(&t,10);
-    // insertIntoTree(&t,20);
-    // insertIntoTree(&t,30);
-    // insertIntoTree(&t,40);
-    //Works Fine
-    // inOrder(t);
-    preOrder(t);
+        // int choice ;
+        // scanf("%d",&choice);
+        //  switch (choice)
+        //   {
+        //         case 1 : 
+        //                 printf("\nEnter data (string) : ");
+        //                 scanf("%s",data[i]);
+        //                 insertIntoTree(&t,data[i]);
+        //                 i++;
+        //                  break;
+        //         case 2 : removeNodeFromTreeHelper(&t);
+        //                  break;
+        //         case 3 : preOrder(t);
+        //                  break;
+        //         case 4 : destroyTree(&t);
+        //                  break;
+        //         case 5 : exit(0);
+        //         default : printf("\nPlease enter a valid choice\n");
+        //   }
+        // }while(1);
     
     return 0;
 }

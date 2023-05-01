@@ -17,7 +17,7 @@ void initAVLTree(AVLTree* tree);
 void insertIntoTree(AVLTree *tnode,char* data);
 void insertRecursivelyIntoTree(AVLTree* tnode,int data);
 AVLTree removeNodeRecursive(AVLTree *root , char* data);
-
+void removeNodeHelper(AVLTree* parent);
 void destroyTree(AVLTree* tnode);
 
 int heightOfTree(AVLTree tNode);
