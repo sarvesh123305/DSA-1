@@ -2,7 +2,8 @@
 #define STACK_H
 
 typedef struct avlTree{
-    int data,bf;
+    int bf;
+    char* data;
     struct avlTree* left;
     struct avlTree* right;          //Maintaining data , balanace factor , left ,right and parent pointer for each node
     struct avlTree* parent;         
@@ -13,10 +14,14 @@ typedef avlTree* AVLTree;
 
 //Basic Tree functions
 void initAVLTree(AVLTree* tree);
-void insertIntoTree(AVLTree *tnode,int data);
+void insertIntoTree(AVLTree *tnode,char* data);
 void insertRecursivelyIntoTree(AVLTree* tnode,int data);
-int heightOfTree(AVLTree tNode);
+AVLTree removeNodeRecursive(AVLTree *root , char* data);
 
+void destroyTree(AVLTree* tnode);
+
+int heightOfTree(AVLTree tNode);
+void removeNode(AVLTree *tnode,char* data);
 
 //Traversals
 void inOrder(AVLTree tnode);

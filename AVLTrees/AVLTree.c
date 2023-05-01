@@ -24,6 +24,18 @@ void reassignBalanceFactor(AVLTree *tnode){
     return ;
 
 }
+
+void reassignBalanceFactorRecursive(AVLTree *tnode){
+
+        AVLTree temp =*tnode;
+        if(!temp){
+            return;
+        }
+    temp -> bf = heightOfTree(temp -> left ) - heightOfTree(temp -> right);     //Assigning balance factor to node as left height - right height
+      
+    return reassignBalanceFactorRecursive(&temp -> parent);
+
+}
 AVLTree getImBalancedNode(AVLTree* tnode){
     if(!tnode)
         return NULL;
@@ -35,6 +47,17 @@ AVLTree getImBalancedNode(AVLTree* tnode){
         temp = temp -> parent;
     }
     return NULL;
+  
+}
+AVLTree getImBalancedNodeRecursive(AVLTree* tnode){
+    if(!tnode)
+        return NULL;
+    AVLTree temp = *tnode;          //Imbalanaced node is that node who has balance factor apart from 0,1,-1
+        if(temp -> bf >= 2 || temp -> bf <= -2){    //Traversing whole the parent ancestor tree for finding imbalanced node 
+             return temp;
+        }
+        temp = temp -> parent;
+    return getImBalancedNodeRecursive(&temp -> parent);
   
 }
 
@@ -94,62 +117,62 @@ void LLRotation(AVLTree* tnode,AVLTree* mainTNode){
 }
 
 void RRRotation(AVLTree* tnode,AVLTree* mainTNode){
-    AVLTree ANode = (*tnode);
-    AVLTree BNode = (*tnode) -> right;
-    AVLTree BNodeLeft = BNode -> left;
-    BNode -> left = ANode;
+    // AVLTree ANode = (*tnode);
+    // AVLTree BNode = (*tnode) -> right;
+    // AVLTree BNodeLeft = BNode -> left;
+    // BNode -> left = ANode;
 
-    ANode -> right = BNodeLeft;
+    // ANode -> right = BNodeLeft;
     
-    BNode -> parent = ANode -> parent;
+    // BNode -> parent = ANode -> parent;
     
-    if(BNodeLeft)
-        BNodeLeft -> parent = ANode;
+    // if(BNodeLeft)
+    //     BNodeLeft -> parent = ANode;
 
-    ANode -> parent = BNode;
-    BNode -> bf = ANode -> bf = 0;
+    // ANode -> parent = BNode;
+    // BNode -> bf = ANode -> bf = 0;
 
-    if((*mainTNode) == ANode){
-        *mainTNode = BNode;
-        return;
+    // if((*mainTNode) == ANode){
+    //     *mainTNode = BNode;
+    //     return;
 
-    }
-    // if(!BNode -> parent){
-    //     printf("********************");
-    //     return ;
     // }
-    if( BNode -> parent -> left == ANode)
-        BNode -> parent -> left = BNode;
+    // // if(!BNode -> parent){
+    // //     printf("********************");
+    // //     return ;
+    // // }
+    // if( BNode -> parent -> left == ANode)
+    //     BNode -> parent -> left = BNode;
     
-    else
-        BNode -> parent -> right = BNode;
-    reassignBalanceFactor(&ANode);
-    return;
-    // AVLTree A = (*tnode);
-    // AVLTree B = A -> right;
-    // AVLTree BR = B -> left;
-    // AVLTree AP = A -> parent;
-    // B -> parent = AP;
-    // if(!AP){
-    //     *mainTNode = B;
-    // }
-    // else{
-    //     if(AP -> right == A){
-    //         AP -> right = B;
-    //     }
-    //     else{
-    //         AP -> left = B;
-    //     }
-    // }
-    // A -> parent = B;
-    // B -> left = A;
-    // A -> right = BR;
-    // if(BR){
-    //     BR -> parent = A;
-    // }
-    // A -> bf = 0;
-    // B -> bf = 0;
+    // else
+    //     BNode -> parent -> right = BNode;
     // reassignBalanceFactor(&ANode);
+    // return;
+    AVLTree A = (*tnode);
+    AVLTree B = A -> right;
+    AVLTree BR = B -> left;
+    AVLTree AP = A -> parent;
+    B -> parent = AP;
+    if(!AP){
+        *mainTNode = B;
+    }
+    else{
+        if(AP -> right == A){
+            AP -> right = B;
+        }
+        else{
+            AP -> left = B;
+        }
+    }
+    A -> parent = B;
+    B -> left = A;
+    A -> right = BR;
+    if(BR){
+        BR -> parent = A;
+    }
+    A -> bf = 0;
+    B -> bf = 0;
+    reassignBalanceFactor(&A);
 }
 void LRRotation(AVLTree* tnode,AVLTree* mainTNode){
     RRRotation(&(*mainTNode)-> left,tnode);
@@ -190,7 +213,6 @@ void insertIntoTree(AVLTree *tnode,int data){
     
      reassignBalanceFactor(&q);
 
-
      AVLTree imBalancedNode = getImBalancedNode(&q);
      if(!imBalancedNode)
         return;
@@ -216,6 +238,55 @@ void insertIntoTree(AVLTree *tnode,int data){
         // printf("\nsar%d\n ", imBalancedNode -> parent  -> parent ? imBalancedNode  -> parent -> parent -> data : INT_MAX);
 
 
+    }
+
+    void insertRecursivelyIntoTree(AVLTree* tnode,int data){
+
+    avlTree* newnode =  mallocateANode(tnode,data);
+     if(!*tnode){
+        *tnode = newnode;
+        return;
+     }
+     AVLTree q = *tnode;
+       if(*tnode && (*tnode) -> data == data){
+        return;
+    }
+    if(!*tnode){
+       avlTree* newnode = mallocateANode(tnode,data);
+        *tnode = newnode;
+        return;
+    }
+
+    if((*tnode) -> data > data){
+        insertRecursivelyIntoTree(&(*tnode) -> left,data);
+    }
+    else{
+        insertRecursivelyIntoTree(&(*tnode) -> right,data);
+    }
+     newnode -> parent = q;
+    
+         reassignBalanceFactorRecursive(&q);
+
+
+     AVLTree imBalancedNode = getImBalancedNode(&q);
+     if(!imBalancedNode)
+        return;
+     printf("\nImbalaned Node : %d , data : %d\n",imBalancedNode ? imBalancedNode -> bf : INT_MIN,imBalancedNode ? imBalancedNode -> data :INT_MIN );
+     if(imBalancedNode -> bf == -2){
+
+        if(imBalancedNode -> right -> bf == -1)
+            RRRotation(&imBalancedNode,tnode);
+        else{
+
+            RLRotation(&imBalancedNode,tnode);
+        }
+     }   
+     else if(imBalancedNode -> bf == 2 ){
+        if(imBalancedNode -> left -> bf == 1)
+            LLRotation(&imBalancedNode,tnode);
+        else
+            LRRotation(&imBalancedNode ,tnode);
+     }
     }
 
 void inOrder(AVLTree tnode){
