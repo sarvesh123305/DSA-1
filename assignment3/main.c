@@ -30,19 +30,45 @@ int main(){
     FILE* fp;
     char ch;
     int k = 0; 
-    fp = fopen("data.txt", "r");
+    fp = fopen("data1.txt", "r");
      if (NULL == fp) {
         return 0;
     }
   char str[1000];
     //   int i = 0;
 
-    while (fscanf(fp, "%s", data[k]) != EOF) {
-        printf(" %s\n", data[k]);
-        insertIntoTree(&t,data[k]);
-        k++;
-        i++;
-    }
+    // while (fscanf(fp, "%s", data[k]) != EOF) {
+    //     // printf(" %s\n", data[k]);
+    //     insertIntoTree(&t,data[k]);
+    //     // printf("\n");
+    //     // preOrder(t);
+    //     // printf("\n");
+    //     k++;
+    //     i++;
+    // }
+    insertIntoTree(&t,"Analee");
+    insertIntoTree(&t,"Sholmo");
+    insertIntoTree(&t,"Jalyan");
+    insertIntoTree(&t,"Hally");
+    insertIntoTree(&t,"Karli");
+    insertIntoTree(&t,"Dora");
+    removeNode(&t,"Jalyan");
+    // k = 0 , i = 0 ;
+    // preOrder(t);
+    // fclose(fp);
+    // fp = fopen("data1.txt", "r");
+
+    //  while (fscanf(fp, "%s", data[k]) != EOF) {
+    //     // printf(" %s\n", data[k]);
+    //     // insertIntoTree(&t,data[k]);
+    //     // printf("\n");
+    //     // preOrder(t);
+    //     // printf("\n");
+    //     removeNode(&t,data[k]);
+    //     k++;
+    //     i++;
+    // }
+
 
     preOrder(t);
 
