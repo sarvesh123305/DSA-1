@@ -67,14 +67,34 @@ int main(){
     //Works Fine
 
     //RR Check
+    // insertIntoTree(&t,10);
+    // insertIntoTree(&t,20);
+    // insertIntoTree(&t,30);
+    // insertIntoTree(&t,40);
+    //Works Fine
+    //
     insertIntoTree(&t,10);
     insertIntoTree(&t,20);
     insertIntoTree(&t,30);
     insertIntoTree(&t,40);
-    //Works Fine
+    insertIntoTree(&t,50);
+    // insertIntoTree(&t,60);
+    insertIntoTree(&t,70);
+    insertIntoTree(&t,80);
+    insertIntoTree(&t,90);
+    insertIntoTree(&t,5);
+    insertIntoTree(&t,2);
+    insertIntoTree(&t,3);
+    insertIntoTree(&t,6);
+    insertIntoTree(&t,200);
+    insertIntoTree(&t,300);
 
-    // inOrder(t);
-    preOrder(t);
+
+
+
+
+    inOrder(t);
+    // preOrder(t);
     
     return 0;
 }

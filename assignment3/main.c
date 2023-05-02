@@ -26,7 +26,6 @@ int main(){
     AVLTree t;
     initAVLTree(&t);   
     char data[1000][1000];
-    int i = 0 ;
     FILE* fp;
     char ch;
     int k = 0; 
@@ -35,62 +34,47 @@ int main(){
         return 0;
     }
   char str[1000];
-    //   int i = 0;
+      int i = 0;
 
-    // while (fscanf(fp, "%s", data[k]) != EOF) {
-    //     // printf(" %s\n", data[k]);
-    //     insertIntoTree(&t,data[k]);
-    //     // printf("\n");
-    //     // preOrder(t);
-    //     // printf("\n");
-    //     k++;
-    //     i++;
-    // }
-    insertIntoTree(&t,"Analee");
-    insertIntoTree(&t,"Sholmo");
-    insertIntoTree(&t,"Jalyan");
-    insertIntoTree(&t,"Hally");
-    insertIntoTree(&t,"Karli");
-    insertIntoTree(&t,"Dora");
-    removeNode(&t,"Jalyan");
-    // k = 0 , i = 0 ;
+    while (fscanf(fp, "%s", data[k]) != EOF) {
+        // printf(" %s\n", data[k]);
+        insertIntoTree(&t,data[k]);
+        k++;
+        i++;
+    }
     // preOrder(t);
-    // fclose(fp);
-    // fp = fopen("data1.txt", "r");
+    k = 0 , i = 0 ;
+    fclose(fp);
+    fp = fopen("data1.txt", "r");
 
-    //  while (fscanf(fp, "%s", data[k]) != EOF) {
-    //     // printf(" %s\n", data[k]);
-    //     // insertIntoTree(&t,data[k]);
-    //     // printf("\n");
-    //     // preOrder(t);
-    //     // printf("\n");
-    //     removeNode(&t,data[k]);
-    //     k++;
-    //     i++;
-    // }
+     while (fscanf(fp, "%s", data[k]) != EOF) {
+        removeNode(&t,data[k]);
+        k++;
+        i++;
+    }
 
+    // printf("\nFinal");
+    // printf("\n\nN : %s BF :  %d L : %s  , R  : %s\n\n", t -> data, t -> bf , t -> left ? t -> left -> data :"NO", t -> right ? t -> right -> data : "NO");
+    // printf("END\n");
+    
+    // preOrder(t);
 
-    preOrder(t);
+//  insertIntoTree(&t,"Analee");
+    // insertIntoTree(&t,"Sholmo");
+    // insertIntoTree(&t,"Jalyan");
+    // insertIntoTree(&t,"Hally");
+    // insertIntoTree(&t,"Karli");
+    // insertIntoTree(&t,"Dora");
+    // removeNode(&t,"Jalyan");
+    // preOrder(t);
+
 
     // insertIntoTree(&t,"Sarvesh");
     // insertIntoTree(&t,"Mahind");
     // insertIntoTree(&t,"Kulkarni");
     // removeNode(&t,"Mahind");
 
-    // preOrder(t);
-    // removeNode(&t,"Kulkarni");
-    // preOrder(t);
-    //Testing
-    //  printf("\nEnter data (string) : ");
-    //                     scanf("%s",data[i]);
-    //                     insertIntoTree(&t,data[i]);
-    //                     i++;
-    //                     scanf("%s",data[i]);
-    //                     insertIntoTree(&t,data[i]);
-    //                     preOrder(t);
-    //                     removeNode(&t,"Sarvesh");
-    //                     preOrder(t);
-
+   
     // do{
         // printf("\n\n*****AVL Tree Program*****\n");
         // printf("\n1.Insert into Tree ");

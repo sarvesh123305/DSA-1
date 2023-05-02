@@ -18,6 +18,7 @@ void initAVLTree(AVLTree *tnode)
 {
     *tnode = NULL; // Initializing a structure
 }
+
 void reassignBalanceFactor(AVLTree *tnode)
 {
     AVLTree temp = *tnode;
@@ -37,6 +38,7 @@ AVLTree getImBalancedNode(AVLTree *tnode)
     AVLTree temp = *tnode; // Imbalanaced node is that node who has balance factor apart from 0,1,-1
     while (temp)
     {
+        // printf("sar");
         if (temp->bf >= 2 || temp->bf <= -2)
         { // Traversing whole the parent ancestor tree for finding imbalanced node
             return temp;
@@ -74,8 +76,8 @@ void LLRotation(AVLTree *tnode, AVLTree *mainTNode)  //Rotate whole tree in righ
     //     BNode -> parent -> right = BNode;
     // }
     // reassignBalanceFactor(&ANode);          //We have rotated the tree using pointers , now reassingning its bf
-
     // return;
+
     AVLTree A = (*tnode);
     AVLTree B = A->left;
     AVLTree BR = B->right;
@@ -231,23 +233,14 @@ void insertIntoTree(AVLTree *tnode, char *data)
     AVLTree imBalancedNode = getImBalancedNode(&q);
     if (!imBalancedNode)
         return;
-    // if(strcmp("Dora",data)){
-    //     printf("\n\nImbalaned Node : %s , bf -> %d\n\n", imBalancedNode -> data,imBalancedNode -> bf);
-    //     printf("\nBF RIGHT %d\n",imBalancedNode -> right-> bf);
-
-    // }
+    
     if (imBalancedNode->bf == -2)
     {
 
         if (imBalancedNode->right->bf == -1)
             RRRotation(&imBalancedNode, tnode);
         else
-        {
-
             RLRotation(&imBalancedNode, tnode);
-            // preOrder(*tnode);
-            // exit(0);
-        }
     }
     else if (imBalancedNode->bf == 2)
     {
@@ -277,8 +270,8 @@ void preOrder(AVLTree tnode)
         return;
     }
 
-    printf("N: %s  ,BF : %d , L : %s , R : %s\n", tnode ? tnode->data : "",
-           tnode->bf, tnode->left ? tnode->left->data : "", tnode->right ? tnode->right->data : "");
+    printf("N: %s  ,BF : %d , L : %s , R : %s , P : %s\n", tnode ? tnode->data : "",
+           tnode->bf, tnode->left ? tnode->left->data : "", tnode->right ? tnode->right->data : "",tnode -> parent ? tnode -> parent -> data : "");
 
     preOrder(tnode->left);
     preOrder(tnode->right);
@@ -369,11 +362,16 @@ AVLTree removeNodeRecursive(AVLTree *root, char *data)
 
 void removeNodeHelper(AVLTree* parent)
 {
+    if(!(*parent)){
+        return;
+    }
     reassignBalanceFactor(parent);
 
     AVLTree imBalancedNode = getImBalancedNode(parent);
     if (!imBalancedNode)
         return;
+    // while(imBalancedNode){
+        // printf("\n\n");
     // printf("\nImbalaned Node : %s , bf : %d\n", imBalancedNode->data, imBalancedNode->bf);
     if (imBalancedNode->bf == -2)
     {
@@ -391,6 +389,7 @@ void removeNodeHelper(AVLTree* parent)
         else
             LRRotation(&imBalancedNode, parent);
     }
+
 }
 
 void removeNode(AVLTree *tnode, char *data)
@@ -425,15 +424,20 @@ void removeNode(AVLTree *tnode, char *data)
         return; // Node not present
     }
     // Now 4 cases
-
+    
     // leaf node
+    int flag = 0;
+    
     if (!p->right && !p->left)
     {
-
+          
         avlTree *deleteNode = p;
         AVLTree temp = deleteNode->parent;
         if (p == *tnode) // There is only 1 node (root node)
-            *tnode = NULL;
+            {
+                *tnode = NULL;
+                
+            }
 
         else
         {
@@ -450,18 +454,19 @@ void removeNode(AVLTree *tnode, char *data)
         free(deleteNode);
         removeNodeHelper(&temp);
 
-        if((*tnode) -> parent == (temp))
+        if((*tnode) && (*tnode) -> parent == (temp))
         *tnode = temp;
         return;
     }
-
+   //1 child -> Only left child exists
     if (!p->right && p->left)
     {
         AVLTree deleteNode = p;
         AVLTree temp = deleteNode->parent;
         if (p == *tnode) // There is root with only left child
         {
-            p -> left -> parent = (*tnode) -> parent;
+            // p -> left -> parent = (*tnode) -> parent;// Also would work instead of p -> left -> parent
+            (*tnode) -> parent = NULL ;
             *tnode = p->left;
         }
 
@@ -480,12 +485,12 @@ void removeNode(AVLTree *tnode, char *data)
         }
         free(deleteNode);
         removeNodeHelper(&temp);
-        if((*tnode) -> parent == (temp))
+        if((*tnode) && (*tnode) -> parent == (temp))
         *tnode = temp;
 
         return;
     }
-
+    //1 Child , Only right child exists
     if (p->right && !p->left)
     {
         avlTree *deleteNode = p;
@@ -507,11 +512,12 @@ void removeNode(AVLTree *tnode, char *data)
         }
         free(deleteNode);
         removeNodeHelper(&temp);
-        if((*tnode) -> parent == (temp))
+        if((*tnode) && (*tnode) -> parent == (temp))
         *tnode = temp;
 
         return;
     }
+    //2 Childs i.e there exits both left and right
     if (p->right && p->left)
     {
 
@@ -523,7 +529,6 @@ void removeNode(AVLTree *tnode, char *data)
         {
             p->data = (char *)malloc(sizeof(preecedingPointer->data));
             strcpy(p->data, preecedingPointer->data);
-            // p -> data = preecedingPointer -> data;
             p->left = preecedingPointer->left;
             if(preecedingPointer -> left)
             preecedingPointer -> left -> parent = p;
@@ -542,14 +547,23 @@ void removeNode(AVLTree *tnode, char *data)
             strcpy(p->data, temp->data);
 
             parentOfTemp = preecedingPointer;
+            // if(preecedingPointer -> data){
+            //     printf("\nNeeds to be deleted%s\n", p -> data);
+            //     printf("\nTEMP DATA : %s\n",temp -> data);
+            //     printf("\nDATA : %s\n",preecedingPointer -> data);
+            // }
+            if(temp -> left){
+                preecedingPointer -> right = temp -> left;
+                temp -> left -> parent = preecedingPointer; //EDGE CASE , MISSING CASE
+            }
+            else
             preecedingPointer->right = NULL;
             free(temp);
         }
         removeNodeHelper(&parentOfTemp);
-        if((*tnode) -> parent == parentOfTemp)
+        if((*tnode) && (*tnode) -> parent == parentOfTemp)
         *tnode = parentOfTemp;
- 
-        return;
+
     }
 }
 
