@@ -302,6 +302,67 @@ int heightOfTree(AVLTree tNode)
 
     return 1 + max(heightOfTree(tNode->left), heightOfTree(tNode->right));
 }
+
+//
+
+//    AVLTree* minimumVal(AVLTree* root){
+//         if((*root) == NULL){
+//             return root;
+//         }
+        
+//         while((*root) -> left != NULL){
+//             (*root) = (*root) -> left;
+//         }
+//         return root;
+        
+//     }
+//    AVLTree*  deleteNode(AVLTree* root, char* data) {
+//         if((*root) == NULL){
+//             return NULL;
+//         }
+//            int result = strcmp((*root)->data, data);
+ 
+//         if(result == 0){
+//             //no child
+//             if((*root) -> left == NULL && (*root) -> right == NULL){
+//                 free(root);
+//                 return NULL;
+//             }
+//             //1 child
+//             //left child
+//               if((*root) -> left != NULL && (*root) -> right == NULL){
+//                   AVLTree temp = (*root) -> left;
+//                 free(root);
+//                 return temp;
+//                 }
+//             //right child
+//              if((*root) -> left == NULL && (*root) -> right != NULL){
+//                   AVLTree temp = (*root) -> right;
+//                 free(root);
+//                 return temp;
+//                 }
+//             //2child
+//                if((*root) -> left != NULL && (*root) -> right != NULL){
+//                   char* mini = minimumVal((*root) -> right , data);
+//                 //    (*root) -> data = mini;
+//                 strcpy((*root) -> data,mini);
+//                    (*root) -> right = deleteNode((*root) -> right,mini);
+//                    return root;
+//                 }
+            
+//         }
+//         else if(result > 0){
+//             (*root) -> left = deleteNode((*root) -> left,data);
+//             return root;
+//         }
+//         else{
+//            (*root) -> right = deleteNode((*root) -> right,data);
+//         return root;
+//         }
+// return root;
+//     }
+//
+
 AVLTree removeNodeRecursive(AVLTree *root, char *data)
 {
     if (!*root)
@@ -563,7 +624,6 @@ void removeNode(AVLTree *tnode, char *data)
         removeNodeHelper(&parentOfTemp);
         if((*tnode) && (*tnode) -> parent == parentOfTemp)
         *tnode = parentOfTemp;
-
     }
 }
 

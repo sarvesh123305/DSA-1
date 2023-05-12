@@ -29,7 +29,7 @@ int main(){
     FILE* fp;
     char ch;
     int k = 0; 
-    fp = fopen("data1.txt", "r");
+    fp = fopen("names", "r");
      if (NULL == fp) {
         return 0;
     }
@@ -47,17 +47,20 @@ int main(){
     fclose(fp);
     fp = fopen("data1.txt", "r");
 
-     while (fscanf(fp, "%s", data[k]) != EOF) {
-        removeNode(&t,data[k]);
-        k++;
-        i++;
-    }
+    //  while (fscanf(fp, "%s", data[k]) != EOF) {
+    //     // removeNode(&t,data[k]);
+        
+    //     k++;
+    //     i++;
+    // }
+        removeNode(&t,"Guzman");
+
 
     // printf("\nFinal");
     // printf("\n\nN : %s BF :  %d L : %s  , R  : %s\n\n", t -> data, t -> bf , t -> left ? t -> left -> data :"NO", t -> right ? t -> right -> data : "NO");
     // printf("END\n");
     
-    // preOrder(t);
+    preOrder(t);
 
 //  insertIntoTree(&t,"Analee");
     // insertIntoTree(&t,"Sholmo");

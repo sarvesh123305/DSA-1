@@ -3,6 +3,7 @@
 #include<limits.h>
 #include "minheap.h"
 
+#define PARENT (i-1)/2
 void initMinHeap(minHeap* tnode){
     tnode -> size = 0;
     tnode -> arr = NULL;
@@ -23,10 +24,10 @@ void insert(minHeap* tnode,int data){
     tnode -> size =  tnode -> size + 1;
 
     while( i > 0){
-        if(tnode -> arr[i] > tnode -> arr[i/2])
+        if(tnode -> arr[i] > tnode -> arr[PARENT])
         {
-            swap(&tnode -> arr[i],&tnode -> arr[i/2]);
-            i = i/2;
+            swap(&tnode -> arr[i],&tnode -> arr[PARENT]);
+            i = PARENT;
         }
         else
             return;
@@ -45,10 +46,10 @@ int PopNode(minHeap* tnode){
         int leftIndex = i*2+1;
         int rightIndex = i*2 + 2;
         int temp = i;
-        if(tnode -> arr[i] < tnode -> arr[leftIndex]){
+        if(leftIndex < tnode -> size && tnode -> arr[i] < tnode -> arr[leftIndex]){
             i = leftIndex;
         }
-        if(tnode -> arr[i] < tnode -> arr[rightIndex]){
+        if(rightIndex < tnode -> size && tnode -> arr[i] < tnode -> arr[rightIndex]){
             i = rightIndex;
         }
         if(i != temp){
