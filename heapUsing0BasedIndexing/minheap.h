@@ -10,3 +10,4 @@ void initMinHeap(minHeap* tnode);
 void insert(minHeap* tnode,int data);
 int PopNode(minHeap* tnode);
 void display(minHeap tnode);
+void heapSort(minHeap* tnode);

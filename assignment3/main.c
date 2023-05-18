@@ -1,5 +1,4 @@
 #include<stdio.h>
-// #include "BST.h"
 #include<stdlib.h>
 #ifndef MAIN_H
 #define MAIN_H
@@ -24,12 +23,23 @@ void removeNodeFromTreeHelper(AVLTree *t){
 
 int main(){
     AVLTree t;
-    initAVLTree(&t);   
+    initAVLTree(&t);
+    // insertIntoTree(&t,"pratyay");   
+    // insertIntoTree(&t,"mukhmale");
+    // insertIntoTree(&t,"sohel");
+    // insertIntoTree(&t,"om");
+    // // insertIntoTree(&t,"dhaigude");
+
+     
+    // removeNode(&t,"pratyay");
+
+    // preOrder(t);
+
     char data[1000][1000];
     FILE* fp;
     char ch;
     int k = 0; 
-    fp = fopen("names", "r");
+    fp = fopen("pratyay.txt", "r");
      if (NULL == fp) {
         return 0;
     }
@@ -45,22 +55,59 @@ int main(){
     // preOrder(t);
     k = 0 , i = 0 ;
     fclose(fp);
-    fp = fopen("data1.txt", "r");
+    fp = fopen("pratyay.txt", "r");
 
-    //  while (fscanf(fp, "%s", data[k]) != EOF) {
-    //     // removeNode(&t,data[k]);
-        
-    //     k++;
-    //     i++;
-    // }
-        removeNode(&t,"Guzman");
+     while (fscanf(fp, "%s", data[k]) != EOF) {
+        // removeNode(&t,data[k]);
+        k++;
+        i++;
+    }
+         removeNode(&t,"4");
+         preOrder(t);
+         printf("\n*********************\n");
+        //  removeNode(&t,"3");
+        //  if(t -> parent != NULL){
+            // printf("sadas");
+        //  }
+        //  removeNode(&t,"6");
+        //  removeNode(&t,"5");
+        //  removeNode(&t,"2");
+        //  removeNode(&t,"1");
+        //  removeNode(&t,"8");
+        //  removeNode(&t,"7");
+        //  removeNode(&t,"9");
+/*
+              3
+           2       6
+        1       5      8
+                    7    9 
 
+    
+    */
+     preOrder(t );
 
     // printf("\nFinal");
     // printf("\n\nN : %s BF :  %d L : %s  , R  : %s\n\n", t -> data, t -> bf , t -> left ? t -> left -> data :"NO", t -> right ? t -> right -> data : "NO");
     // printf("END\n");
-    
-    preOrder(t);
+    // removeNode(&t,"Joshua");
+    // removeNode(&t,"Emily");
+    // removeNode(&t,"Michael");
+    // removeNode(&t,"Daniel");
+    // removeNode(&t,"Ashley");
+    // removeNode(&t,"Matthew");
+    // removeNode(&t,"Jessica");
+    // removeNode(&t,"William");
+    // removeNode(&t,"Elizabeth");
+    // removeNode(&t,"Christopher");
+    // removeNode(&t,"Sarah");
+    // removeNode(&t,"Amanda");
+    // removeNode(&t,"James");
+    // removeNode(&t,"Jennifer");
+
+    // removeNode(&t,"David");
+    // removeNode(&t,"Stephanie");
+
+    // preOrder(t);
 
 //  insertIntoTree(&t,"Analee");
     // insertIntoTree(&t,"Sholmo");

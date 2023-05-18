@@ -17,6 +17,7 @@ void insertIntoTree(AVLTree *tnode,int data);
 void insertRecursivelyIntoTree(AVLTree* tnode,int data);
 int heightOfTree(AVLTree tNode);
 
+void removeNode(AVLTree *tnode,int data);
 
 //Traversals
 void inOrder(AVLTree tnode);
