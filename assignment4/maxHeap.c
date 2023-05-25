@@ -65,10 +65,27 @@ void heapSortAscending(maxHeap* tnode){
     REAR = count;
 }
 
-void heapSortDescending(maxHeap* tnode){
-    for(int i = 0 ; i <= REAR/2; i++){
-        swap(&ARR[i] ,&ARR[REAR-i]);
+void heapSortDescendingOpt(maxHeap tnode){
+    int k = tnode.rear;
+    for(int i = 0 ; i <= k ; i++){
+        int temp = popNode(&tnode);
+        swap(&tnode.arr[k-i],&temp);
     }
+    tnode.rear = k ;
+    display(tnode);
+}
+
+
+void heapSortDescending(maxHeap* tnode){
+    display(*tnode);
+
+    // int k = REAR;
+    // for(int i = 0 ; i <= k ; i++){
+    //     int temp = popNode(tnode);
+    //     swap(&ARR[k-i],&temp);
+    // }
+    // tnode->rear = k ;
+    heapSortDescendingOpt(*tnode);
 }
 
 int popNode(maxHeap* tnode){

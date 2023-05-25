@@ -16,13 +16,18 @@ int main(){
     insert(&tnode,60);
     insert(&tnode,13);
 
-    popNode(&tnode);
-    popNode(&tnode);
+    // popNode(&tnode);
+    // popNode(&tnode);
+
+
+    // insert(&tnode,100);
+    // insert(&tnode,20);
+    // insert(&tnode,50);
+
     display(tnode);
 
-    heapSortAscending(&tnode);
-    display(tnode);
-
+    // heapSortAscending(&tnode);
+    // display(tnode);
     heapSortDescending(&tnode);
 
    
