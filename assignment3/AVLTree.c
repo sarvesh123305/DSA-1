@@ -37,7 +37,6 @@ AVLTree getImBalancedNode(AVLTree *tnode)
     AVLTree temp = *tnode; // Imbalanaced node is that node who has balance factor apart from 0,1,-1
     while (temp)
     {
-        
         if (temp->bf >= 2 || temp->bf <= -2)
             return temp;  // Traversing whole the parent ancestor tree for finding imbalanced node
         temp = temp->parent;
@@ -48,8 +47,6 @@ AVLTree getImBalancedNode(AVLTree *tnode)
 
 void LLRotation(AVLTree *tnode, AVLTree *mainTNode)  //Rotate whole tree in right direction
 {
-   
-
     AVLTree A = (*tnode);
     AVLTree B = A->left;
     AVLTree BR = B->right;
@@ -73,8 +70,8 @@ void LLRotation(AVLTree *tnode, AVLTree *mainTNode)  //Rotate whole tree in righ
     B->bf = 0;
 
     reassignBalanceFactor(&A);          //We have rotated the tree using pointers , now reassingning its bf
-
     return;
+
 }
 
 void RRRotation(AVLTree *tnode, AVLTree *mainTNode) //Rotate tree to left
@@ -101,6 +98,8 @@ void RRRotation(AVLTree *tnode, AVLTree *mainTNode) //Rotate tree to left
     A->bf = 0;
     B->bf = 0;
     reassignBalanceFactor(&A);  //We have rotated the tree using pointers , now reassingning its bf
+
+    return;
 }
 void LRRotation(AVLTree *tnode, AVLTree *mainTNode)
 {
@@ -182,7 +181,6 @@ void inOrder(AVLTree tnode)
 }
 void preOrder(AVLTree tnode)
 {
-
     if (!tnode)
         return;
 
@@ -201,7 +199,6 @@ int heightOfTree(AVLTree tNode)
 {
     if (!tNode)
         return -1;
-
     return 1 + max(heightOfTree(tNode->left), heightOfTree(tNode->right));
 }
 
@@ -220,19 +217,18 @@ void removeNodeHelper(AVLTree* parent)
     // printf("\nImbalaned Node : %s , bf : %d\n", imBalancedNode->data, imBalancedNode->bf);
     if (imBalancedNode->bf == -2)
     {
-        if (imBalancedNode->right->bf == -1)
+        if (imBalancedNode->right->bf == 0 || imBalancedNode->right->bf == -1) 
             RRRotation(&imBalancedNode, parent);
         else
             RLRotation(&imBalancedNode, parent);
     }
     else if (imBalancedNode->bf == 2)
     {
-        if (imBalancedNode->left->bf == 1)
+        if (imBalancedNode->left->bf == 0 ||imBalancedNode->left->bf == 1 )
             LLRotation(&imBalancedNode, parent);
-        else
-            LRRotation(&imBalancedNode, parent);
+        else  
+            LRRotation(&imBalancedNode, parent);        
     }
-
 }
 
 void removeNode(AVLTree *tnode, char *data)
@@ -253,11 +249,11 @@ void removeNode(AVLTree *tnode, char *data)
         else
             p = p->right;
     }
-    if (p)
-        printf("%s Found\n", p->data);
+    // if (p)
+        // printf("%s Found\n", p->data);
     
     if (!p){
-        printf("\n %s Not Found\n", data);
+        // printf("\n %s Not Found\n", data);
         return; // Node not present
     }
     // Now 4 cases
@@ -362,6 +358,7 @@ void removeNode(AVLTree *tnode, char *data)
         }
         else
         {
+            // printf("\nDeleted %s \n", temp -> left -> data);
             while (temp->right)
             {
                 preecedingPointer = temp;
@@ -381,7 +378,7 @@ void removeNode(AVLTree *tnode, char *data)
             free(temp);
         }
         removeNodeHelper(&parentOfTemp);
-        
+
         if((*tnode) && (*tnode) -> parent &&  (*tnode) -> parent == (parentOfTemp))
         *tnode = parentOfTemp;
     }

@@ -4,7 +4,7 @@
 int main(){
     graph g;
     initGraph(&g);
-    display(g);
+    // display(g);
     BFS(g,1);
     return 0;
 }
