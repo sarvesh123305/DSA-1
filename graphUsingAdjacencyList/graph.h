@@ -3,7 +3,6 @@
 typedef struct Node{
     int weight;
     int index;
-
     struct Node* next;
 }Node;
 
@@ -16,8 +15,9 @@ typedef struct graph{
 
 typedef graph Graph;
 
-void initGraph(Graph*);
+void initGraph(Graph*,char*);
 void displayGraph(Graph);
 void BFS(Graph,int);
-void DFS(Graph g,int v);
-void primsAlgorithm(Graph g,int v);
+void DFS(Graph ,int);
+void primsAlgorithm(Graph ,int);
+void kruskalsAlgorithm(Graph );

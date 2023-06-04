@@ -3,6 +3,7 @@
 #include<limits.h>
 #include "Queue/back.h"
 #include "Stack/stack.h"
+#include "minHeap/minHeap.h"
 
 int min(int a,int b){
     return a < b ? a : b ;
@@ -23,10 +24,12 @@ void appendToLinkdedList(List* L,int weight, int index){
     Node* temp  = *L;
     while (temp -> next)
     {
-        temp = temp -> next;
+        temp = temp -> next;        //Insert to back
     }
 
     temp -> next = newnode;
+    //newnode -> next = *L;       //Insert To Front
+    //*L = newnode;
     return;
 }
 
@@ -37,9 +40,9 @@ void displayList(List L){
     printf("Index : %d , Weight : %d \n",L -> index,L -> weight);
     displayList(L -> next);
 }
-void initGraph(Graph *g){
+void initGraph(Graph *g,char* filename){
     FILE *fp;
-    fp = fopen("input","r");
+    fp = fopen(filename,"r");
     
     if(!fp)
         return ;
@@ -134,7 +137,8 @@ void DFS(Graph g,int v){
 
     while(!isEmptyStack(st)){
         int node = pop(&st);
-        printf("%d ",node);
+        // printf("%d ",node);
+        printf("%c ",node + 'A');
 
         Node* temp = g.column[node];
         while(temp){
@@ -183,4 +187,60 @@ void primsAlgorithm(Graph g,int v){
     }
     printf("Weight : %d",totalWeight);
     return ;        
+}
+
+void kruskalsAlgorithm(Graph g){
+
+    // if(detectCycle(g)){
+        // removeCycle(&g);
+    // }   
+    int n = g.size;
+    minHeap heap;
+    initminHeap(&heap,n);
+    int countWeight = 0;
+    int *visited = (int*)calloc(g.size,sizeof(int)); //calloc beacuse bydefault it makes it 0
+    if(!visited)
+    return;
+
+    int *set = (int*)calloc(g.size,sizeof(int)); //calloc beacuse bydefault it makes it 0
+    if(!set)
+    return;
+    
+    for(int i = 0 ; i < n ; i++){
+        set[i] = i ;
+    }
+
+    for(int i = 0 ; i < n; i++){
+        Node* temp = g.column[i];
+        while (temp)
+        {   
+            visited[i] = 1;
+            if(visited[temp -> index] == 0) 
+            // printf("\nStart : %d  , end : %d , weight : %d\n",i,temp -> index,temp ->weight);
+            insert(&heap,i,temp -> index,temp -> weight);
+            temp = temp -> next;
+        }
+    }
+    int count = 0;
+    do{        
+        Data getTop = popNode(&heap);
+        if(getTop.weight == INT_MIN)
+            break;
+
+        if(set[getTop.start] != set[getTop.end] )
+        {
+            count += getTop.weight; 
+            printf("\nStart : %c  , end : %c , weight : %d\n",getTop.start+ 'A',getTop.end+'A',getTop.weight);
+            int temp = set[getTop.end];
+            int replace = set[getTop.start];
+            for(int i = 0 ; i < n; i++){
+                if(set[i] == temp)
+                    set[i] = replace;
+            }
+
+        }
+    }
+        while(1);
+        printf("\n%d Weight ", count);
+        return ;
 }

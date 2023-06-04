@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "back.h": "c",
-        "graph.h": "c"
+        "graph.h": "c",
+        "stdio.h": "c"
     }
 }
