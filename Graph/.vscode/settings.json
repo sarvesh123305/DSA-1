@@ -4,6 +4,7 @@
         "hashmap.h": "c",
         "limits.h": "c",
         "stdlib.h": "c",
-        "collections.h": "c"
+        "collections.h": "c",
+        "stdio.h": "c"
     }
 }

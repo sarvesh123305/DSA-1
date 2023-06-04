@@ -25,17 +25,6 @@ printf("\n");
 
 }
 
-int getLength(Queue q){
-    int size = 0;
-    if(isEmpty(q))
-        return size;
-    while(q.front){
-        size++;
-        q.front = q.front ->next;
-    }
-    return size;
-}
-
 void enqueue(Queue* q,int data){
     node* newnode = (node*) malloc(sizeof(node));
     if(!newnode)

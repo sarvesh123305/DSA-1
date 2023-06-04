@@ -18,4 +18,3 @@ int isEmpty(Queue);
 void enqueue(Queue*,int);
 int dequeue(Queue*);
 void displayQueue(Queue);
-int getLength(Queue q);

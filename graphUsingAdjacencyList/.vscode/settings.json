@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "back.h": "c",
+        "graph.h": "c"
+    }
+}
