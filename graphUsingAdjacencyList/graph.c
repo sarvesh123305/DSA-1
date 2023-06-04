@@ -188,7 +188,6 @@ void primsAlgorithm(Graph g,int v){
     printf("Weight : %d",totalWeight);
     return ;        
 }
-
 void kruskalsAlgorithm(Graph g){
 
     // if(detectCycle(g)){
@@ -244,3 +243,55 @@ void kruskalsAlgorithm(Graph g){
         printf("\n%d Weight ", count);
         return ;
 }
+int findminIndex(int* cost,int* vis,int n){
+    int miniindex;
+    int minval=INT_MAX;
+    for(int i=0;i<n;i++)
+    {
+        if(minval>cost[i] && !vis[i]){
+            minval=cost[i];
+            miniindex=i;
+        }
+    }
+    return miniindex;
+}
+
+
+void dijestra(graph g,int start){
+    int n = g.size;
+    int *visited = (int*) calloc(n,sizeof(int));
+    if(!visited)
+        return ;
+    int *cost = (int*) malloc(sizeof(int)*n);
+    if(!cost)
+    {
+        free(visited);
+        return ;
+    }
+
+    for(int i = 0 ; i < n ;i++){
+        cost[i] = INT_MAX;
+    }
+    
+    cost[start] = 0;
+    int mini ,minIndex ;
+    
+    for(int i = 0 ; i < n ; i++){
+        int index=findminIndex(cost,visited,n);
+        visited[index] = 1;
+
+        Node* temp = g.column[index];
+        while(temp ){
+            int vertex=temp->index;
+            if(cost[index] + temp -> weight < cost[vertex])
+                cost[vertex] = cost[index] + temp -> weight;
+            temp=temp->next;
+        }
+        
+    }
+    for(int i = 0 ; i < n ;i++){
+            printf("%d ",cost[i]);
+    }
+    free(cost);
+    free(visited);
+} 

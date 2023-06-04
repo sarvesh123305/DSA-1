@@ -6,8 +6,9 @@ int main(int arg,char* argv[]){
     initGraph(&g,argv[1]);
     // BFS(g,0);
     // DFS(g,0);
-    displayGraph(g);
-    // kruskalsAlgorithm(g);
+    // displayGraph(g);
     // primsAlgorithm(g,0);
+    // kruskalsAlgorithm(g);
+    dijestra(g,5);
     
 }

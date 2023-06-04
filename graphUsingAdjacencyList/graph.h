@@ -21,3 +21,4 @@ void BFS(Graph,int);
 void DFS(Graph ,int);
 void primsAlgorithm(Graph ,int);
 void kruskalsAlgorithm(Graph );
+void dijestra(graph,int);
