@@ -15,10 +15,13 @@ typedef struct graph{
 
 typedef graph Graph;
 
+typedef Node** SpanningTree;
+
 void initGraph(Graph*,char*);
 void displayGraph(Graph);
 void BFS(Graph,int);
 void DFS(Graph ,int);
-void primsAlgorithm(Graph ,int);
-void kruskalsAlgorithm(Graph );
+SpanningTree primsAlgorithm(Graph ,int);
+SpanningTree kruskalsAlgorithm(Graph );
 void dijestra(graph,int);
+void printSpanningTree(SpanningTree,Graph);
