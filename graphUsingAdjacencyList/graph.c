@@ -1,7 +1,7 @@
 #include "graph.h"
 #include<stdlib.h>
 #include<limits.h>
-#include "Queue/back.h"
+#include "Queue/queue.h"
 #include "Stack/stack.h"
 #include "minHeap/minHeap.h"
 
@@ -81,9 +81,9 @@ void initGraph(Graph *g,char* filename){
 void displayGraph(Graph g){
     
       for(int i = 0 ; i < g.size; i++){
-        List check = (g).column[i];
+        List temp = (g).column[i];
         printf("i = %d , ",i);
-        displayList(check);
+        displayList(temp);
         printf("\n");
     }
 
@@ -113,13 +113,13 @@ void BFS(graph g,int v){
 
     while(!isEmpty(q)){
         int v = dequeue(&q);
-        printf("Node : %d\n",v);
-        int i = v ;
+        printf("%d ",v);
+       
         
-        Node* temp = g.column[i]; 
+        Node* temp = g.column[v]; 
         while(temp)
         {
-            if(temp -> index && !visited[temp -> index]){
+            if(!visited[temp -> index]){
                 enqueue(&q,temp -> index);
                 visited[temp -> index] = 1;
             }
@@ -133,7 +133,7 @@ void DFS(Graph g,int v){
     if(isGraphNULLOrInaccessible(g,v))
         return ;
     stack st;
-    initStack(&st,100);
+    initStack(&st,g.size);
 
     int *visited = (int*)calloc(g.size,sizeof(int)); //calloc beacuse bydefault it makes it 0
     if(!visited)
@@ -259,7 +259,7 @@ SpanningTree kruskalsAlgorithm(Graph g){
         if(getTop.weight == INT_MIN)
             break;
 
-        if(set[getTop.start] != set[getTop.end] )
+        if(set[getTop.start] != set[getTop.end] ) // Indicates both start and end are in diff sets
         {
             appendToLinkdedList(&tree[j],getTop.weight,getTop.start);
             count += getTop.weight; 
@@ -281,17 +281,17 @@ SpanningTree kruskalsAlgorithm(Graph g){
         printf("\n%d Weight ", count);
         return tree;
 }
-int findminIndex(int* cost,int* vis,int n){
-    int miniindex;
-    int minval=INT_MAX;
+int findminIndex(int* cost,int* visited,int n){
+    int minIndex,minVal=INT_MAX;
+
     for(int i=0;i<n;i++)
     {
-        if(minval>cost[i] && !vis[i]){
-            minval=cost[i];
-            miniindex=i;
+        if(minVal>cost[i] && !visited[i]){
+            minVal=cost[i];
+            minIndex=i;
         }
     }
-    return miniindex;
+    return minIndex;
 }
 
 

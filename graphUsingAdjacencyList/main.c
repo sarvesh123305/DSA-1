@@ -4,8 +4,9 @@
 int main(int arg,char* argv[]){
     Graph g ;
     initGraph(&g,argv[1]);
-    // BFS(g,0);
-    // DFS(g,0);
+    BFS(g,0);
+    printf("\n");
+    DFS(g,0);
     // displayGraph(g);
     // SpanningTree t = primsAlgorithm(g,0);
     // printSpanningTree(t,g);

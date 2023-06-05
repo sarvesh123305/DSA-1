@@ -1,4 +1,4 @@
 run:
-	gcc -g *.c Queue/back.c Stack/stack.c minHeap/minHeap.c
+	gcc -g *.c Queue/queue.c Stack/stack.c minHeap/minHeap.c
 	./a.out input
 

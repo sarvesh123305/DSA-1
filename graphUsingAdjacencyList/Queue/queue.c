@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include "back.h"
+#include "queue.h"
 #include<stdlib.h>
 void initQueue(Queue* q){
     q -> front = NULL;
